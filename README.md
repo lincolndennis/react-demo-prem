@@ -1,3 +1,13 @@
+# React and TinyMCE with Premium Plugins
+
+
+In  /src/App.js, edit line 14:
+```
+        apiKey='YOUR_API_KEY HERE'
+```
+...to include your API key.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
