@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 
-function App() {
+export default function App() {
+  const editorRef = useRef(null);
+  const log = () => {
+    if (editorRef.current) {
+      console.log(editorRef.current.getContent());
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Editor
+        apiKey='YOUR_API_KEY_HERE'
+        onInit={(evt, editor) => editorRef.current = editor}
+        initialValue="<p>This is the initial content of the editor.</p>"
+        init={{
+          height: 500,
+          menubar: false,
+          plugins: [
+            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+            'anchor', 'searchreplace', 'visualblocks', 'fullscreen',
+            'insertdatetime', 'media', 'table', 'help', 'permanentpen', 'powerpaste', 'advcode'
+          ],
+          toolbar: 'code permanentpen',
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        }}
+      />
+      <button onClick={log}>Log editor content</button>
+    </>
   );
 }
-
-export default App;
